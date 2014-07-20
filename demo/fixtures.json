@@ -1,0 +1,19 @@
+[{
+    "pk": 1,
+    "model": "app1.publication",
+    "fields": {
+        "title": "The Python Journal"
+    }
+}, {
+    "pk": 2,
+    "model": "app1.publication",
+    "fields": {
+        "title": "Science News"
+    }
+}, {
+    "pk": 3,
+    "model": "app1.publication",
+    "fields": {
+        "title": "Science Weekly"
+    }
+}]

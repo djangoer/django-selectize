@@ -1,28 +1,33 @@
 {% load selectize_tags %}
-{% load staticfiles %}
-<!--<link rel="stylesheet" href="{% static "selectize/css/selectize.default.css" %}" data-theme="default">
-<script src="{% static "selectize/jquery.min.js" %}"></script>
-<script src="{% static "selectize/selectize.min.js" %}"></script>-->
 {% selectize_tags_media 'css' 'default' %}
 {% selectize_tags_media 'js' 'jquery' %}
 {% selectize_tags_media 'js' 'selectize' %}
 
 <h2>Articles</h2>
-<ul>
+<table border="2">
+    <tr><th>Headline</th><th>Publications</th><th></th></tr>
     {% for article in object_list %}
-    	<li>
-	    	<strong>{{ article.headline }}</strong>
-	    	{% for publication in article.publications.all %}
-	        	{{ publication.title }},
+    	<tr>
+	    	<td>(R:{{article.ratings}}) <strong>{{ article.headline }}</strong></td>
+	    	<td>
+            {% for publication in article.publications.all %}
+	        	<span style="color:green">{{ publication.title }}</span>,
 	        {% endfor %}
-        </li>
+            </td>
+            <td><a href="{% url 'article_update' article.pk %}">update</a></td>
+        </tr>
     {% endfor %}
-</ul><hr>
-<h2> create a new article</h2>
-<form action="" method="post">{% csrf_token %}
+</table>
+<hr>
+<form action="" method="post" style="border:1px solid #ccc">{% csrf_token %}
+    <h3> Create or Update an article</h3>
     {{ form.as_p }}
     <input type="submit" value="Submit" />
+    {% if form.instance.pk %}
+        <a href="{% url 'articles' %}">Cancel</a>
+    {% endif %}
 </form>
 <script type="text/javascript">
     $('#id_publications').selectize();
+    $('#id_ratings').selectize();
 </script>

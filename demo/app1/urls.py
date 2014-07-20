@@ -1,8 +1,7 @@
 from django.conf.urls import url
-from django.views.generic import TemplateView
+from app1.views import ArticleAdd,ArticleUpdate
 
-from app1.views import ArticleView
 urlpatterns = [
-	url(r'^$', TemplateView.as_view(template_name="home.html"),name='home'),
-	url(r'^articles/$', ArticleView.as_view(),name='articles'),
+	url(r'^articles/add/$', ArticleAdd.as_view(),name='articles'),
+	url(r'^articles/(?P<pk>[0-9]+)/$', ArticleUpdate.as_view(), name='article_update'),
 ]

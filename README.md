@@ -16,7 +16,7 @@ Installing django-selectize
 There are several ways to install django-selectize:
 
 * Automatically, via a package manager: `pip install django-selectize`
-* Manually, by downloading a copy of the release package and copy the folder `selectize` to your project directory.
+* Manually, by downloading a release package then unzip and copy the folder `selectize` to your project directory.
 
 Required settings
 -----------------
