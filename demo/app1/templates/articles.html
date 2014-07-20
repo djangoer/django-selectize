@@ -1,3 +1,12 @@
+{% load selectize_tags %}
+{% load staticfiles %}
+<!--<link rel="stylesheet" href="{% static "selectize/css/selectize.default.css" %}" data-theme="default">
+<script src="{% static "selectize/jquery.min.js" %}"></script>
+<script src="{% static "selectize/selectize.min.js" %}"></script>-->
+{% selectize_tags_media 'css' 'default' %}
+{% selectize_tags_media 'js' 'jquery' %}
+{% selectize_tags_media 'js' 'selectize' %}
+
 <h2>Articles</h2>
 <ul>
     {% for article in object_list %}
@@ -14,3 +23,6 @@
     {{ form.as_p }}
     <input type="submit" value="Submit" />
 </form>
+<script type="text/javascript">
+    $('#id_publications').selectize();
+</script>

@@ -19,9 +19,8 @@ class MultiSelectFunctionalTests(TestCase):
         self.driver.close()
 
     def testAddArticlePage(self):
-    	"""As a visitor to the site, when I load the
-    	articles page I see the publications in 
-    	Selectize.js multiselect theme."""
+    	"""As a visitor to the site, when I load the articles page, I see the 
+    	publications in Selectize.js multiselect theme."""
 
     	self.driver.get('{0}{1}'.format(self.base_url,'/articles/'))
     	self.assertIn("Headline:", self.driver.find_element_by_tag_name('body').text)
