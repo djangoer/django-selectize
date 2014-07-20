@@ -21,3 +21,8 @@ class Article(models.Model):
 
 	class Meta:
 		ordering = ('headline',)
+
+from django.forms import ModelForm
+class ArticleForm(ModelForm):
+	class Meta:
+		model = Article

@@ -1,0 +1,16 @@
+<h2>Articles</h2>
+<ul>
+    {% for article in object_list %}
+    	<li>
+	    	<strong>{{ article.headline }}</strong>
+	    	{% for publication in article.publications.all %}
+	        	{{ publication.title }},
+	        {% endfor %}
+        </li>
+    {% endfor %}
+</ul><hr>
+<h2> create a new article</h2>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
