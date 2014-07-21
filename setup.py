@@ -9,7 +9,7 @@ setup(name='django-selectize',
     author='Djangoer',
     author_email='djangoer0@gmail.com',
     url='https://github.com/djangoer/django-selectize',
-	packages=['selectize'],#py_modules=['modoscript'],
+	packages=['selectize','selectize.templatetags'],#py_modules=['modoscript'],
 	install_requires=[
 		"Django",	
 	],
