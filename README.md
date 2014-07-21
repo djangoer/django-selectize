@@ -1,5 +1,7 @@
-django-selectize
-================
+[django-selectize](http://selectize-djangoer.rhcloud.com/)
+=================
+
+Note: This is only in Developing stage Now.
 
 django-selectize  is a Django app based on Selectize.js that help you to create Select and Multiselect widgets in Django forms.
 
@@ -16,7 +18,9 @@ Installing django-selectize
 There are several ways to install django-selectize:
 
 * Automatically, via a package manager: `pip install django-selectize`
-* Manually, by downloading a release package then unzip and copy the folder `selectize` to your project directory.
+* Download a release package then unzip and run `python setup.py install` to install it into your python directory.
+* If you don't like to install then download a release package, unzip and copy the folder `selectize` to your Django-project directory.
+
 
 Required settings
 -----------------
@@ -59,6 +63,10 @@ Also if you want to include the jquery file packed with django-selectize,:
 Now Intiate a selectize box from a normal selectbox by calling:
 
 	<script>$('#id_publications').selectize();</script>
+
+
+Full Example
+------------
 
 For testing
 -----------
