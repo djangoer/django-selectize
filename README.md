@@ -39,34 +39,7 @@ Begin by adding `selectize` to the `INSTALLED_APPS` setting of your project. For
 Usage
 -----
 
-In templates, load the `selectize_tags`::
-
-	{% load selectize_tags %}
-
-To include selectize.default.css:
-
-	{% selectize_tags_media 'css' 'default' %}
-
-which will return:
-
-    <link rel="stylesheet" href="{% static "selectize/css/selectize.default.css" %}">
-
-Like wise you can include selectice.js by:
-	
-	{% selectize_tags_media 'js' 'selectize' %}
-
-Also if you want to include the jquery file packed with django-selectize,:
-
-    {% selectize_tags_media 'js' 'jquery' %}
-
-
-Now Intiate a selectize box from a normal selectbox by calling:
-
-	<script>$('#id_publications').selectize();</script>
-
-
-Full Example
-------------
+please visit: <http://selectize-djangoer.rhcloud.com/>
 
 For testing
 -----------
