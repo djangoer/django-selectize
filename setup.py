@@ -4,7 +4,7 @@ except ImportError:
 	from distutils.core import setup
 
 setup(name='django-selectize',
-	version='1.1',
+	version='1.2',
 	description='django-selectize is a Django app based on Selectize.js that help you to create Select and Multiselect widgets in Django forms.',
     author='Djangoer',
     author_email='djangoer0@gmail.com',
