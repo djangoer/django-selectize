@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView,UpdateView
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 #from django.core.urlresolvers import reverse
 from app1.models import Article
 # Create your views here.
