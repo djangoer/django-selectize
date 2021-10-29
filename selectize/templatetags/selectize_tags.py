@@ -1,7 +1,7 @@
 from django import template
 # from django.templatetags.static import static
 # see stackoverflow :http://stackoverflow.com/questions/11721818
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static 
 from django.utils.safestring import mark_safe
 
 register = template.Library()
