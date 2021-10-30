@@ -14,19 +14,24 @@
 		</style>
   </head>
   <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Django Selectize</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav">
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url 'articles' %}">Django ModelForm example</a></li>
+			<li class="nav-item">
+			  <a class="nav-link" href="https://github.com/djangoer/django-selectize">Fork on Github</a></li>
+		  </ul>
+		</div>
+	  </nav><br>
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="{% url 'articles' %}">Django ModelForm example</a></li>
-          <li><a href="https://github.com/djangoer/django-selectize">Fork on Github</a></li>
-        </ul>
-        <h3 class="text-muted">Django Selectize</h3>
-      </div>
-      <hr>
-      <div class="panel panel-default">
-			  <div class="panel-heading">Installing django-selectize:</div>
-      	<div class="panel-body">	
+      <div class="card">
+		<div class="card-header">Installing django-selectize:</div>
+		<div class="card-body">
       	<strong>There are several ways to install django-selectize:</strong>
 					<ul>
 						<li> Automatically, via a package manager: <code>pip install django-selectize</code></li>

@@ -6,9 +6,10 @@ from app1.models import Article
 # Create your views here.
 
 class ArticleView(object):
-    model = Article#form_class = ArticleForm
+    model = Article #form_class = ArticleForm
     success_url = reverse_lazy('articles')
     template_name = 'articles.html'
+    fields = '__all__'
 
     def get_context_data(self, **kwargs):
         kwargs['object_list'] = Article.objects.order_by('id')

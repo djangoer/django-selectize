@@ -13,5 +13,5 @@ class Publication(models.Model):
 class Article(models.Model):
 	headline = models.CharField(max_length=100)
 	publications = models.ManyToManyField(Publication)
-	ratings= models.IntegerField(max_length=1,choices=((0, 'Bad'),(1, 'Average'),
+	ratings= models.IntegerField(choices=((0, 'Bad'),(1, 'Average'),
 		(2, 'Good'),(3, 'Outstanding')),default=1)	

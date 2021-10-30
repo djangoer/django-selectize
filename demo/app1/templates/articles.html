@@ -18,7 +18,7 @@
     {% endfor %}
 </table>
 <hr>
-<form action="" method="post" style="border:1px solid #ccc">{% csrf_token %}
+<form action="." method="post" style="border:1px solid #ccc">{% csrf_token %}
     <h3> Create or Update an article</h3>
     {{ form.as_p }}
     <input type="submit" value="Submit" />
