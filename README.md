@@ -43,7 +43,7 @@ Begin by adding `selectize` to the `INSTALLED_APPS` setting of your project. For
 Usage
 -----
 
-Please run the demo project alocated at https://github.com/djangoer/django-selectize/tree/master/demo
+Please run the demo project located at https://github.com/djangoer/django-selectize/tree/master/demo
 
 For testing
 -----------
