@@ -1,8 +1,11 @@
-[django-selectize](http://selectize-djangoer.rhcloud.com/)
-## made a change to make an entry in hacktoberfest
-=================
-
-Note: This is only in Developing stage Now.
+![PyPI](https://img.shields.io/pypi/v/django-selectize)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-selectize)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/django-selectize)
+![GitHub contributors](https://img.shields.io/github/contributors/djangoer/django-selectize)
+![GitHub last commit](https://img.shields.io/github/last-commit/djangoer/django-selectize)
+   
+> **Note**
+> Note: This is only in Developing stage Now.
 
 django-selectize  is a Django app based on Selectize.js that help you to create Select and Multiselect widgets in Django forms.
 
@@ -40,7 +43,7 @@ Begin by adding `selectize` to the `INSTALLED_APPS` setting of your project. For
 Usage
 -----
 
-please visit: <http://selectize-djangoer.rhcloud.com/>
+Please run the demo project alocated at https://github.com/djangoer/django-selectize/tree/master/demo
 
 For testing
 -----------
