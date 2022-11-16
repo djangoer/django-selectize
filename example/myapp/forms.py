@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from selectize import forms as s2forms
+from django_selectize import forms as s2forms
 
 from . import models
 
@@ -12,11 +12,11 @@ class AuthorWidget(s2forms.SelectizeWidget):
     ]
 
 
-# class CoAuthorsWidget(s2forms.ModelSelect2MultipleWidget):
-#     search_fields = [
-#         "username__icontains",
-#         "email__icontains",
-#     ]
+class CoAuthorsWidget(s2forms.SelectizeMultipleWidget):
+    search_fields = [
+        "username__icontains",
+        "email__icontains",
+    ]
 
 
 class BookForm(forms.ModelForm):
@@ -25,5 +25,5 @@ class BookForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "author": AuthorWidget,
-            # "co_authors": CoAuthorsWidget,
+            "co_authors": CoAuthorsWidget,
         }

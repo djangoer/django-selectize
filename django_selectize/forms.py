@@ -46,31 +46,9 @@ in their names.
     :parts: 1
 
 """
-import operator
-import uuid
-from functools import reduce
-from itertools import chain
-from pickle import PicklingError  # nosec
 
-import django
 from django import forms
-from django.contrib.admin.widgets import SELECT2_TRANSLATIONS, AutocompleteMixin
-from django.core import signing
-from django.db.models import Q
-from django.forms.models import ModelChoiceIterator
-from django.urls import reverse
-from django.utils.translation import get_language
-
-from .cache import cache
-from .conf import settings
-
-if django.VERSION < (4, 0):
-    from django.contrib.admin.utils import (
-        lookup_needs_distinct as lookup_spawns_duplicates,
-    )
-else:
-    from django.contrib.admin.utils import lookup_spawns_duplicates
-
+from itertools import chain
 
 class SelectizeMixin:
     """
@@ -86,17 +64,12 @@ class SelectizeMixin:
 
     empty_label = ""
 
-    @property
-    def i18n_name(self):
-        """Name of the i18n file for the current language."""
-        return SELECT2_TRANSLATIONS.get(get_language())
+    
 
     def build_attrs(self, base_attrs, extra_attrs=None):
         """Add selectize data attributes."""
         default_attrs = {
-            "lang": self.i18n_name,
             "data-minimum-input-length": 0,
-            "data-theme": self.theme or settings.SELECTIZE_THEME,
         }
         if self.is_required:
             default_attrs["data-allow-clear"] = "false"
@@ -127,50 +100,11 @@ class SelectizeMixin:
         .. Note:: For more information visit
             https://docs.djangoproject.com/en/stable/topics/forms/media/#media-as-a-dynamic-property
         """
-        selectize_js = [settings.SELECTIZE_JS] if settings.SELECTIZE_JS else []
-        selectize_css = settings.SELECTIZE_CSS if settings.SELECTIZE_CSS else []
-
-        if isinstance(selectize_css, str):
-            selectize_css = [selectize_css]
-
-        i18n_file = []
-        if self.i18n_name in settings.SELECTIZE_I18N_AVAILABLE_LANGUAGES:
-            i18n_file = [f"{settings.SELECTIZE_I18N_PATH}/{self.i18n_name}.js"]
-
+        
         return forms.Media(
-            js=selectize_js + i18n_file + ["django_selectize/django_selectize.js"],
-            css={"screen": selectize_css + ["django_selectize/django_selectize.css"]},
+            js=["django_selectize/selectize.min.js","django_selectize/django_selectize.js"],
+            css={"screen": ["django_selectize/selectize.css"]},
         )
-
-
-class SelectizeAdminMixin:
-    """Selectize mixin that uses Django's own select template."""
-
-    theme = "admin-autocomplete"
-
-    @property
-    def media(self):
-        css = {**AutocompleteMixin(None, None).media._css}
-        css["screen"].append("django_selectize/django_selectize.css")
-        return forms.Media(
-            js=SelectizeMixin().media._js,
-            css=css,
-        )
-
-
-class SelectizeTagMixin:
-    """Mixin to add selectize tag functionality."""
-
-    def build_attrs(self, base_attrs, extra_attrs=None):
-        """Add selectize's tag attributes."""
-        default_attrs = {
-            "data-minimum-input-length": 1,
-            "data-tags": "true",
-            "data-token-separators": '[",", " "]',
-        }
-        default_attrs.update(base_attrs)
-        return super().build_attrs(default_attrs, extra_attrs=extra_attrs)
-
 
 class SelectizeWidget(SelectizeMixin, forms.Select):
     """
@@ -200,8 +134,21 @@ class SelectizeMultipleWidget(SelectizeMixin, forms.SelectMultiple):
 
     Works just like :class:`.SelectizeWidget` but for multi select.
     """
+'''
 
+class SelectizeTagMixin:
+    """Mixin to add selectize tag functionality."""
 
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """Add selectize's tag attributes."""
+        default_attrs = {
+            "data-minimum-input-length": 1,
+            "data-tags": "true",
+            "data-token-separators": '[",", " "]',
+        }
+        default_attrs.update(base_attrs)
+        return super().build_attrs(default_attrs, extra_attrs=extra_attrs)
+ 
 class SelectizeTagWidget(SelectizeTagMixin, SelectizeMixin, forms.SelectMultiple):
     """
     Selectize drop in widget for for tagging.
@@ -594,7 +541,7 @@ class ModelSelectizeTagWidget(ModelSelectizeMixin, HeavySelectizeTagWidget):
             queryset = MyModel.objects.all()
 
             def value_from_datadict(self, data, files, name):
-                '''Create objects for given non-pimary-key values. Return list of all primary keys.'''
+                # Create objects for given non-pimary-key values. Return list of all primary keys.
                 values = set(super().value_from_datadict(data, files, name))
                 # This may only work for MyModel, if MyModel has title field.
                 # You need to implement this method yourself, to ensure proper object creation.
@@ -606,3 +553,4 @@ class ModelSelectizeTagWidget(ModelSelectizeMixin, HeavySelectizeTagWidget):
                 return cleaned_values
 
     """
+'''

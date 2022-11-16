@@ -1,50 +1,111 @@
-[django-selectize](http://selectize-djangoer.rhcloud.com/)
-
-Django Selectize
-================
-
-Note: This is only in Developing stage Now.
+## Django Selectize
 
 django-selectize  is a Django app based on Selectize.js that help you to create Select and Multiselect widgets in Django forms.
 
+## Installation
 
-Requirements
-------------
+Install `django-selectize`:
 
-* Django
-
-
-Installing django-selectize
----------------------------
-
-There are several ways to install django-selectize:
-
-* Automatically, via a package manager: `pip install django-selectize`
-* Download a release package then unzip and run `python setup.py install` to install it into your python directory.
-* If you don't like to install then download a release package, unzip and copy the folder `selectize` to your Django-project directory.
+    pip install django-selectize
 
 
-Required settings
------------------
 
-Begin by adding `selectize` to the `INSTALLED_APPS` setting of your project. For example, you might have something like the following in your Django settings file:
+Add `django-selectize` to your `INSTALLED_APPS` in your project settings.
 
-	INSTALLED_APPS = (
-	    'django.contrib...',
-	    'django.contrib....',
-	    'selectize',
-	    # ...other installed applications...
-	)
+    INSTALLED_APPS = [
+        # other django apps...
+        'django_selectize',
+    ]
 
-**Note:** you must place `selectize` above other installed applications.
+## Quick Start
+
+Here is a quick example to get you started:
+
+We have the following model:
+
+    # models.py
+    from django.conf import settings
+    from django.db import models
+
+    class Book(models.Model):
+        author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        co_authors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='co_authored_by')
 
 
-For testing
------------
-You need to install Selenium:
+Next, we create a model form with custom Selectize widgets.
 
-    pip install selenium
+	# forms.py
+	from django import forms
+	from django_selectize import forms as s2forms
 
-Run the tests:
+	from . import models
 
-    ./manage.py test
+	class AuthorWidget(s2forms.SelectizeWidget):
+		search_fields = [
+			"username__icontains",
+			"email__icontains",
+		]
+
+	class CoAuthorsWidget(s2forms.SelectizeMultipleWidget):
+		search_fields = [
+			"username__icontains",
+			"email__icontains",
+		]
+
+	class BookForm(forms.ModelForm):
+		class Meta:
+			model = models.Book
+			fields = "__all__"
+			widgets = {
+				"author": AuthorWidget,
+				"co_authors": CoAuthorsWidget,
+			}
+
+
+A simple class based view will do, to render your form:
+
+    # views.py
+    from django.views import generic
+
+    from . import forms, models
+
+    class BookCreateView(generic.CreateView):
+        model = models.Book
+        form_class = forms.BookForm
+        success_url = "/"
+
+Make sure to add the view to your `urls.py`:
+
+    # urls.py
+    from django.urls import include, path
+    from . import views
+
+    urlpatterns = [
+        # ... other patterns
+        path("", views.BookCreateView.as_view(), name="book-create"),
+    ]
+
+
+Finally, we need a little template, `myapp/templates/myapp/book_form.html`
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Create Book</title>
+        {{ form.media.css }}
+        <style>
+            input, select {width: 100%}
+        </style>
+    </head>
+    <body>
+        <h1>Create a new Book</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {{ form.media.js }}
+    </body>
+    </html>
+
