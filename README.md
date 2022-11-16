@@ -38,10 +38,6 @@ Begin by adding `selectize` to the `INSTALLED_APPS` setting of your project. For
 
 **Note:** you must place `selectize` above other installed applications.
 
-Usage
------
-
-please visit: <http://selectize-djangoer.rhcloud.com/>
 
 For testing
 -----------
